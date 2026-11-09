@@ -1,0 +1,249 @@
+:root {
+  --bg-color: #FAF6F0;
+  --card-bg: #FFFFFF;
+  --text-main: #3D2B1F;
+  --text-muted: #8B7D6B;
+  --accent: #E5A97C;
+  --accent-light: #F5D6C1;
+  --accent-dark: #C77F4F;
+  --success: #82B57A;
+  --danger: #E57C7C;
+  --border: #EDE3D8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Nunito', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  padding-bottom: 80px; /* Место для нижнего меню */
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* --- Шапка --- */
+header {
+  padding: 20px;
+  text-align: center;
+}
+header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+header p {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* --- Главный экран (Сетка кнопок) --- */
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  padding: 20px;
+}
+.menu-btn {
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  padding: 25px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+  transition: transform 0.1s;
+}
+.menu-btn:active {
+  transform: scale(0.95);
+}
+.menu-btn svg {
+  width: 32px;
+  height: 32px;
+  color: var(--accent);
+}
+
+/* --- Модальное окно (Форма) --- */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: flex-end; /* Всплывает снизу */
+  justify-content: center;
+  z-index: 100;
+  animation: slideUp 0.2s ease-out;
+}
+.modal-content {
+  background: var(--card-bg);
+  width: 100%;
+  max-width: 600px;
+  border-radius: 25px 25px 0 0;
+  padding: 25px 20px 40px 20px;
+  animation: slideUp 0.3s ease-out;
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.modal-header h2 {
+  font-size: 22px;
+  color: var(--accent-dark);
+}
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+/* --- Поля ввода --- */
+.form-group {
+  margin-bottom: 15px;
+}
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 5px;
+}
+input[type="date"], input[type="text"], select, textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-main);
+  background: var(--bg-color);
+  outline: none;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent);
+}
+
+/* Кнопки выбора (Да/Нет, Сухой/Влажный) */
+.toggle-group {
+  display: flex;
+  gap: 10px;
+}
+.toggle-btn {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-color);
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.toggle-btn.active {
+  background: var(--accent-light);
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+/* Кнопка Сохранить */
+.save-btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-size: 18px;
+  font-weight: 800;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.save-btn:active {
+  background: var(--accent-dark);
+}
+
+/* --- Нижнее меню --- */
+.bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--card-bg);
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0 25px 0; /* +safe area для iPhone */
+  border-top: 2px solid var(--border);
+  max-width: 600px;
+  margin: 0 auto;
+}
+.nav-item {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.nav-item.active {
+  color: var(--accent-dark);
+}
+.nav-item svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* --- Статистика и История (карточки) --- */
+.stat-card, .history-card {
+  background: var(--card-bg);
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 2px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.stat-info h3 {
+  font-size: 16px;
+  color: var(--text-main);
+}
+.stat-info p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+.stat-value {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--accent-dark);
+}
+.delete-btn {
+  background: #fdf0f0;
+  color: var(--danger);
+  border: none;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
